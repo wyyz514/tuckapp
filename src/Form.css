@@ -1,0 +1,63 @@
+.form-section {
+    width: 100%;
+}
+
+.form-section h5 {
+    text-transform: uppercase;
+}
+
+.form-section-container {
+    width: 100%;
+    min-height: 4em;
+}
+
+label {
+    text-indent: 15px;
+    margin-bottom: 5px;
+}
+
+input[type='radio'] {
+    margin: 0;
+}
+
+input[type='range'] {
+    width: 98%;
+}
+
+.form-button-wrap {
+    height: 3em;
+    width: 48%;
+    display: inline-block;
+    margin: 3px;
+    vertical-align: top;
+}
+
+.form-button-wrap button, .full-button {
+    appearance: none;
+    min-height: 2.5em;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 2px;
+    text-align: center;
+    border: 1px solid royalblue;
+    background-color: #fff;
+    color: royalblue;
+    font-family: Heebo;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.form-button-wrap button.active, .full-button {
+    background-color: royalblue;
+    color: #fff;
+}
+
+.full-button {
+    padding: 10px;
+    height: 3.5em;
+}
+
+button {
+    outline: none;
+}

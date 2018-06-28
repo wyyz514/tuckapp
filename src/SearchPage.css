@@ -1,0 +1,17 @@
+.search-page-container {
+  width: 100%;
+  max-width: 768px;
+  margin: auto;
+  height: auto;
+  letter-spacing: 0.03rem;
+  font-family: Heebo;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.results-container {
+  padding: 15px;
+  box-sizing: border-box;
+  max-width: 768px;
+  margin: auto;
+}

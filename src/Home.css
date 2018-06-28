@@ -1,0 +1,65 @@
+.home-container {
+  width: 100%;
+  max-width: 768px;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.03rem;
+}
+
+.home-title-container {
+  height: 4em;
+  width: 100%;
+  text-align: center;
+}
+
+.home-title-container > h1 {
+  font-family: Heebo;
+  font-weight: 700;
+  color: #000;
+}
+
+.home-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-family: Heebo;
+  font-size: 14px;
+  font-weight: 300;
+  color: #666;
+  height: 7em;
+}
+
+.home-button {
+  appearance: none;
+  height: 3em;
+  width: 15em;
+  border: none;
+  border-radius: 3px;
+  background-color: royalblue;
+  color: #fff;
+  font-family: Heebo;
+  font-size: 14px;
+  text-align: center;
+  line-height: 3em;
+  cursor: pointer;
+}
+
+.home-button[disabled] {
+  background-color: #cecece;
+  pointer-events: none;
+}
+
+.home-button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+body {
+  margin: 0 !important;
+  background-color: #fff;
+}
