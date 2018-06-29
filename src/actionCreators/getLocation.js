@@ -17,7 +17,7 @@ export function getLocation() {
         };
 
         let errorHandler = (err) => {
-            console.log(err.message);
+            alert(err.message);
         }
 
         let options = {

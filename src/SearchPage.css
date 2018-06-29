@@ -4,7 +4,6 @@
   margin: auto;
   height: auto;
   letter-spacing: 0.03rem;
-  font-family: Heebo;
   padding: 15px;
   box-sizing: border-box;
 }
@@ -14,4 +13,40 @@
   box-sizing: border-box;
   max-width: 768px;
   margin: auto;
+  min-height: 4em;
+}
+
+#find-restos[disabled] {
+  background-color: #cecece;
+  border: none;
+}
+
+.results-empty {
+  color: #cecece;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.up-button {
+  position: fixed;
+  top: 95%;
+  width: 7em;
+  left: 69%;
+  background-color: #fff;
+  font-size: 14px;
+  color: royalblue;
+  padding: 5px;
+  box-sizing: border-box;
+  border: 1px solid royalblue;
+  border-radius: 3px;
+  text-align: center;
+}
+
+button a {
+  text-decoration: none;
+  color: #fff;
 }

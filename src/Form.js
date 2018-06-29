@@ -10,10 +10,15 @@ export class FormSection extends Component {
    setActiveButton(e) {
        let buttons = [...this.buttonContainer.querySelectorAll('button')];
        buttons.map((button) => {
-           if(e.target !== button && button.classList.contains('active')) {
+           if(e.target != button && button.classList.contains('active')) {
                button.classList.remove('active');
            }
        });
+   }
+   
+   
+   resetFilter() {
+        this.setState({activeId: -1});
    }
    
    renderFormSectionBody() {
@@ -38,7 +43,10 @@ export class FormSection extends Component {
    render() {
        return (
         <div className="form-section">
-            <h5>{this.props.name || ""}</h5>
+            <div className="title-smallbutton">
+            {this.props.name || ""}
+            {(this.props.name != "Distance" && this.props.name) ? <button type="button" className="small-button" name={this.props.name} onClick={(e)=>{this.resetFilter(); this.props.resetHandler(e);}}>Remove Filter</button> : ""}
+            </div>
             <div className="form-section-container" ref={(el) => {this.buttonContainer = el;}}>
                 {this.props.children}
                 {this.renderFormSectionBody()}

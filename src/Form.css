@@ -1,5 +1,10 @@
 .form-section {
     width: 100%;
+    margin-bottom: 40px;
+}
+
+.form-section:last-of-type {
+    margin-bottom: 5px;    
 }
 
 .form-section h5 {
@@ -32,7 +37,7 @@ input[type='range'] {
     vertical-align: top;
 }
 
-.form-button-wrap button, .full-button {
+.form-button-wrap button, .full-button, .small-button {
     appearance: none;
     min-height: 2.5em;
     padding: 5px;
@@ -43,9 +48,16 @@ input[type='range'] {
     border: 1px solid royalblue;
     background-color: #fff;
     color: royalblue;
-    font-family: Heebo;
     font-size: 14px;
     font-weight: 300;
+}
+
+.small-button {
+    width: 8em;
+    min-height: 1em;
+    font-size: 12px;
+    border: none;
+    text-transform: none !important;
 }
 
 .form-button-wrap button.active, .full-button {
@@ -60,4 +72,13 @@ input[type='range'] {
 
 button {
     outline: none;
+}
+
+.title-smallbutton {
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 14px;
 }

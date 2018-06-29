@@ -17,7 +17,7 @@
 }
 
 .home-title-container > h1 {
-  font-family: Heebo;
+  
   font-weight: 700;
   color: #000;
 }
@@ -27,7 +27,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  font-family: Heebo;
   font-size: 14px;
   font-weight: 300;
   color: #666;
@@ -42,7 +41,7 @@
   border-radius: 3px;
   background-color: royalblue;
   color: #fff;
-  font-family: Heebo;
+  
   font-size: 14px;
   text-align: center;
   line-height: 3em;
