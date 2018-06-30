@@ -1,5 +1,6 @@
 import React from 'react';
 import './Result.css';
+import Carousel from 'nuka-carousel';
 
 class Result extends React.Component {
     constructor(props) {
@@ -15,10 +16,20 @@ class Result extends React.Component {
         });    
     }
     
+    renderImages() {
+        return this.props.restaurant.links.map((link, index) => {
+            return <div style={{backgroundImage: `url(${link})`}} className="restoImages" key={index}/>;
+        })    
+    }
+    
     render() {
         return (
         <div className="result-container">
-            <div className="result-pictures"></div>
+            <div className="result-pictures">
+                <Carousel>
+                    {this.renderImages()}
+                </Carousel>
+            </div>
             <div className="result-close-button" onClick={this.props.closeHandler}></div>
             <div className={this.state.isExpanded ? "result-info expanded" : "result-info"}>
                 <div className="expand-toggle" onClick={() => {this.expandHandler();}}>{this.state.isExpanded ? "Minimize" : "Expand"}</div><br/>

@@ -44,8 +44,16 @@ class SearchPage extends Component {
     }
 
     renderRestaurants() {
+        if(!this.props.restaurants.restaurants) {
+            return "";
+        }
+        
+        if(this.props.restaurants.restaurants.length == 0) {
+            return <div className="results-empty">Sorry, we couldn't find any restaurants. Please try modifying your search.</div>
+        }
+        
         return this.props.restaurants.restaurants.map((restaurant, index) => {
-            return <ResultCard restaurant={restaurant} key={index} />
+            return <ResultCard restaurant={restaurant} key={index} resultActionHandler={() => {this.setSelectedResult(index);}}/>
         })
     }
 
@@ -72,9 +80,6 @@ class SearchPage extends Component {
         });
     }
 
-    // componentDidUpdate() {
-    //     console.log(this.props)    
-    // }
     
     render() {
         return (
@@ -108,7 +113,7 @@ class SearchPage extends Component {
                 </div>
                 <div className="results-container" id="results">
                     {this.props.restaurants.restaurants && <p style={{textAlign: "center", fontSize:"12px"}} className="green">{(this.props.restaurants.restaurants && this.props.restaurants.restaurants.length) || 0} restaurants found</p>}
-                    {this.props.restaurants.restaurants && this.props.restaurants.restaurants.length > 0 ? this.renderRestaurants(): (this.state.hasSearched ? <div className="results-empty">Sorry, we couldn't find any restaurants. Please try modifying your search.</div> : "")}
+                    {this.renderRestaurants()}
                 </div>
                 {this.renderResult()}
             </div>
