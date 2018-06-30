@@ -3,7 +3,6 @@
   max-width: 768px;
   margin: auto;
   height: auto;
-  letter-spacing: 0.03rem;
   padding: 15px;
   box-sizing: border-box;
 }
@@ -33,7 +32,7 @@
 
 .up-button {
   position: fixed;
-  top: 95%;
+  top: 90%;
   width: 7em;
   left: 69%;
   background-color: #fff;
@@ -49,4 +48,10 @@
 button a {
   text-decoration: none;
   color: #fff;
+}
+
+.splash-container {
+  width: 100%;
+  height: 24em;
+  background-color: #000;
 }

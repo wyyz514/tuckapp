@@ -17,7 +17,7 @@ export function getLocation() {
         };
 
         let errorHandler = (err) => {
-            alert(err.message);
+            alert("Please turn on your geolocation services in order to proceed.");
         }
 
         let options = {
