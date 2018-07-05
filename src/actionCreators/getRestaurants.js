@@ -89,7 +89,7 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                             return prev.concat(next);
                         }, [])
                         
-                        if(splitAmbiences.includes(restaurant.Ambiance.toLowerCase())) {
+                        if(splitAmbiences.includes(restaurant.Ambience.toLowerCase())) {
                             return restaurant;
                         }
             

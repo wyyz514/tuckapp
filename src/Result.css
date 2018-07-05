@@ -78,7 +78,7 @@
 .result-info p {
     
     font-size: 14px;
-    line-height: 20px;
+    line-height: 16px;
     color: grey;
 }
 
@@ -114,4 +114,8 @@
 
 .slider-control-bottomcenter {
     top: 45%;
+}
+
+.result-description {
+    white-space: pre-wrap;
 }
