@@ -62,7 +62,6 @@
     background-color: #fff;
     min-height: 20em;
     padding: 10px;
-    
     box-sizing: border-box;
 }
 
@@ -77,13 +76,18 @@
 
 .result-info p {
     
-    font-size: 14px;
-    line-height: 16px;
-    color: grey;
+    font-size: 13px;
+    line-height: 14px;
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: bold;
 }
 
 .green {
     color:#81c784;
+}
+
+.red {
+    color: rgba(255, 0, 0, 0.5);
 }
 
 .expand-toggle {

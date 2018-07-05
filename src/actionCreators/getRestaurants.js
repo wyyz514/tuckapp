@@ -36,21 +36,67 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
     
     
     function setStatus(restaurant, shortDay) {
-        let times = restaurant[`working_hours__${shortDay}`];   
+        console.log(restaurant)
+        let times = JSON.parse(restaurant[`working_hours__${shortDay}`]);   
+        
+        function isAM(time) {
+            return time.slice(-3).trim() === "am";
+        }
         
         function setStatusHelper(times, index) {
-            
             if(!times[index]) {
                 return Object.assign({}, restaurant, {isOpen: false});
             }
             
+            let parsedTime = times[index];
+            
+            let _startTime = parsedTime.startTime;
+            let _endTime   = parsedTime.endTime;
+            
+            let startTime = _startTime.slice(0, _startTime.length - 3).split(":");
+            let endTime   = _endTime.slice(0, _endTime.length - 3).split(":"); 
+            
+            let startTimeHour   = isAM(_startTime) ? (startTime[0] === "12" ? 0 :parseInt(startTime[0])) : (startTime[0] === "12" ? 12 : parseInt(startTime[0]) + 12);
+            let startTimeMinute = startTime[1];
+            
+            
+            let endTimeHour     = isAM(_endTime) ? (endTime[0] === "12" ? 0 :parseInt(endTime[0])) : (endTime[0] === "12" ? 12 : parseInt(endTime[0]) + 12);
+            let endTimeMinute   = endTime[1];
+            
+            let momentStartTime = moment().hours((startTimeHour == 12 ? 0 : startTimeHour)).minutes(startTimeMinute);
+            let momentEndTime   = moment().hours((endTimeHour == 12 ? 0 : endTimeHour)).minutes(endTimeMinute);
+            
+            
+            
+            if(startTimeHour == 0) {
+                momentStartTime = momentStartTime.add(1, 'day');
+            }
+            
+            if(endTimeHour == 0) {
+                momentEndTime = momentEndTime.add(1, 'day');
+            }
+            
+            if(moment().diff(momentStartTime) < 0) {
+                return Object.assign({}, restaurant, {isOpen: false});
+            }
+            
+            if(moment().diff(momentStartTime) >= 0 && moment().diff(momentEndTime) < 0) {
+                return Object.assign({}, restaurant, {isOpen: true});
+            }
+            
+            if(moment().diff(momentStartTime) >= 0 && moment().diff(momentEndTime) > 0) {
+                return setStatusHelper(times, index + 1);
+            }
+            
             
         }
+        
+        return setStatusHelper(times, 0);
     }
     
     return ((dispatch) => {
-        
-        base.fetch('/masterSheet', {
+                base.fetch('/masterSheet', {
+
                 asArray: true
             })
             .then((restaurants) => {
@@ -117,11 +163,9 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                             return restaurant;
                         }
                     })
-                    // .map((restaurant) => {
-                    //     setStatus(restaurant, moment().format('ddd'))
-                    //     return restaurant;
-                    // })
-                    
+                    .map((restaurant) => {
+                       return setStatus(restaurant, moment().format('ddd'));
+                    })
                     
                     dispatch(getPicLinks(filteredRestaurants));
             });
