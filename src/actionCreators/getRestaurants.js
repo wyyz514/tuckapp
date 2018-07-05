@@ -36,17 +36,29 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
     
     
     return ((dispatch) => {
-        base.fetch('/', {
+        base.fetch('/masterSheet', {
                 asArray: true
             })
             .then((restaurants) => {
-                let filteredRestaurants = restaurants
+                let columnNames = restaurants[0];
+                
+                let _restaurants = restaurants.slice(1).map((restaurant) => {
+                    let restaurantObj = {};
+                    
+                    for(let i = 0; i < columnNames.length; i++) {
+                        restaurantObj[columnNames[i]] = restaurant[i];
+                    }
+                    
+                    return restaurantObj;
+                })
+                
+                let filteredRestaurants = _restaurants
                     .filter((restaurant) => {
                         if(Meal.length == 0) {
                             return restaurant;
                         }
                         
-                        if(restaurant.category.toLowerCase().includes(Meal[0])) {
+                        if(restaurant["info__Good For"].toLowerCase().includes(Meal[0])) {
                             return restaurant;
                         }
                     })
@@ -69,13 +81,18 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                             return restaurant;
                         }
                         
-                        let splitAmbiences = Array.every((ambience) => {
-                            return ambience.split(" and ");
+                        let splitAmbiences = Ambience.map((ambience) => {
+                            let split = ambience.split(" and ");
+                            return split;
                         })
+                        .reduce((prev, next) => {
+                            return prev.concat(next);
+                        }, [])
                         
-                        console.log(splitAmbiences);
-                        
-                        return restaurant;
+                        if(splitAmbiences.includes(restaurant.Ambiance.toLowerCase())) {
+                            return restaurant;
+                        }
+            
                     })
                     .filter((restaurant) => {
                         if (!Distance) {

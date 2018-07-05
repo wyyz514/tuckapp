@@ -100,10 +100,6 @@ class SearchPage extends Component {
                 
     }
     
-    componentDidUpdate() {
-        console.log(this.state.filters)    
-    }
-    
     render() {
         return (
             <div>
@@ -122,7 +118,7 @@ class SearchPage extends Component {
                             <p>{this.state.filters.Distance || 0} km</p>
                         </FormSection>
                         
-                        <FormSection name="Ambience" options={[...AMBIENCE_TYPES]} changeHandler={this.setFilter}>
+                        <FormSection name="Ambience" options={[...AMBIENCE_TYPES]} changeHandler={this.setFilter} multiple={true}>
                         </FormSection>
                         <FormSection options={[]}>
                                 <button type="button" id="find-restos" className="full-button" disabled={this.shouldEnableButton() ? '' : 'disabled'} onClick={() => {this.getRestaurants(); this.setState((prevState) => {

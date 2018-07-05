@@ -13,6 +13,6 @@ const config = {
 
 const app = firebase.initializeApp(config)
 const base = Rebase.createClass(app.database())
-const storage = app.storage().ref("Images");
+const storage = app.storage().ref("app-backend-2334a.appspot.com/Images");
 
 export { base, storage }

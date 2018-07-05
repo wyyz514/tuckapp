@@ -52,9 +52,6 @@ export class FormSection extends Component {
        });
    }
    
-   componentDidUpdate(prevProps, prevState) {
-       console.log(this.state, prevState)
-   }
    render() {
        return (
         <div className="form-section">
