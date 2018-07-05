@@ -1,5 +1,5 @@
 import { base, storage } from '../DB';
-
+import * as moment from 'moment';
 export const GET_RESTAURANTS_QUERY = 'GET_RESTAURANTS_QUERY';
 export const GET_RESTAURANTS_SUCCESS = 'GET_RESTAURANTS_SUCCESS';
 
@@ -35,7 +35,21 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
     }
     
     
+    function setStatus(restaurant, shortDay) {
+        let times = restaurant[`working_hours__${shortDay}`];   
+        
+        function setStatusHelper(times, index) {
+            
+            if(!times[index]) {
+                return Object.assign({}, restaurant, {isOpen: false});
+            }
+            
+            
+        }
+    }
+    
     return ((dispatch) => {
+        
         base.fetch('/masterSheet', {
                 asArray: true
             })
@@ -103,6 +117,11 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                             return restaurant;
                         }
                     })
+                    // .map((restaurant) => {
+                    //     setStatus(restaurant, moment().format('ddd'))
+                    //     return restaurant;
+                    // })
+                    
                     
                     dispatch(getPicLinks(filteredRestaurants));
             });
