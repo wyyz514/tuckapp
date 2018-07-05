@@ -100,6 +100,10 @@ class SearchPage extends Component {
                 
     }
     
+    componentDidUpdate() {
+        console.log(this.state.filters)    
+    }
+    
     render() {
         return (
             <div>

@@ -21,12 +21,12 @@ export class FormSection extends Component {
                         
                         onClick={(e) => {
                            this.setState((prevState) => {
-                               if(prevState.selectedIds.indexOf(index) > -1) {
+                               if(this.state.selectedIds.indexOf(index) > -1) {
                                    if(! this.props.multiple) {
                                         return {selectedIds: []};
                                    }
                                    else {    
-                                        let ids = prevState.selectedIds.filter((id, i) => {
+                                        let ids = this.state.selectedIds.filter((id, i) => {
                                             if(id != index) {
                                                 return id;
                                             }
@@ -55,6 +55,9 @@ export class FormSection extends Component {
        });
    }
    
+   componentDidUpdate(prevProps, prevState) {
+       console.log(this.state, prevState)
+   }
    render() {
        return (
         <div className="form-section">
