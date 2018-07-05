@@ -4,21 +4,10 @@ import './Form.css';
 export class FormSection extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            selectedIds: []
+        };
     }
-   
-   setSelectedInSection(selection) {
-        this.setState((prevState) => {
-            if(prevState.selected != selection) {
-                return {selected: selection}
-            }
-            else {
-                this.props.resetHandler(this.props.name);
-                return {selected: "", activeId: -1}
-            }
-        });    
-   }
-   
    
    renderFormSectionBody() {
        if(this.props.inputType === 'range') {
@@ -27,9 +16,36 @@ export class FormSection extends Component {
        return this.props.options.map((option, index) => {
            return (
                 <div className="form-button-wrap" key={index}>
-                    <button type="button" className={this.state.activeId == index ? 'active' : ''} 
+                    <button type="button" className={this.state.selectedIds.indexOf(index) > -1 ? 'active' : ''}
                         key={index} 
-                        onClick={(e) => {this.setState({activeId: index}); this.props.changeHandler(e); this.setSelectedInSection(option)}} 
+                        
+                        onClick={(e) => {
+                           this.setState((prevState) => {
+                               if(prevState.selectedIds.indexOf(index) > -1) {
+                                   if(! this.props.multiple) {
+                                        return {selectedIds: []};
+                                   }
+                                   else {    
+                                        let ids = prevState.selectedIds.filter((id, i) => {
+                                            if(id != index) {
+                                                return id;
+                                            }
+                                        })
+                                        return {selectedIds: ids}
+                                   }
+                                   
+                               }
+                               else {
+                                   if(! this.props.multiple) {
+                                        return {selectedIds: [index]};   
+                                   }
+                                   else 
+                                        return {selectedIds: prevState.selectedIds.concat(index)};
+                               }
+                           });
+                           this.props.changeHandler(e.target, this.props.multiple);
+                        }}
+                        
                         name={this.props.name} 
                         value={option}>
                         {option}

@@ -15,6 +15,10 @@
   min-height: 4em;
 }
 
+#find-restos {
+  transition: all 0.2s ease-in-out;
+}
+
 #find-restos[disabled] {
   background-color: #cecece;
   border: none;

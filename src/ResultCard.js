@@ -14,7 +14,7 @@ class ResultCard extends React.Component {
         return (
         <div className="result-card-wrap">
             <div className="result-card">
-                <div className="result-image" style={{backgroundImage: `url(${this.props.restaurant.links[0]}`}}></div>
+                <div className="result-image" style={{backgroundImage: `url(${this.props.restaurant.links[4]}`}}></div>
                 <div className="result-blurb">
                     <div className="result-blurb-head">
                         <span>{this.props.restaurant.name}</span>

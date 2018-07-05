@@ -3,7 +3,7 @@ import { base, storage } from '../DB';
 export const GET_RESTAURANTS_QUERY = 'GET_RESTAURANTS_QUERY';
 export const GET_RESTAURANTS_SUCCESS = 'GET_RESTAURANTS_SUCCESS';
 
-export function getRestaurants({ Meal = null, Cuisine = null, Distance = "", Ambience = "", Price = null }, { latitude, longitude }) {
+export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambience = [], Price = [] }, { latitude, longitude }) {
 
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
         var R = 6371; // Radius of the earth in km
@@ -21,7 +21,20 @@ export function getRestaurants({ Meal = null, Cuisine = null, Distance = "", Amb
     function deg2rad(deg) {
         return deg * (Math.PI / 180)
     }
-
+    
+    function pricePointToPrice(pricePoint) {
+        let price = "";
+        let count = 0;
+        
+        while(count < pricePoint) {
+            price += "$";
+            count += 1;
+        }
+        
+        return price;
+    }
+    
+    
     return ((dispatch) => {
         base.fetch('/', {
                 asArray: true
@@ -29,27 +42,20 @@ export function getRestaurants({ Meal = null, Cuisine = null, Distance = "", Amb
             .then((restaurants) => {
                 let filteredRestaurants = restaurants
                     .filter((restaurant) => {
-                        let mealMatch = restaurant.category.toLowerCase().match(Meal);
-                        let cuisineMatch = restaurant.category.toLowerCase().match(Cuisine);
-
-                        if (!Meal && !Cuisine) {
+                        if(Meal.length == 0) {
                             return restaurant;
                         }
-
-                        if (!mealMatch && Cuisine == "any") {
-                            return restaurant;
-                        }
-
-                        if (mealMatch || (cuisineMatch && Cuisine != "any")) {
+                        
+                        if(restaurant.category.toLowerCase().includes(Meal[0])) {
                             return restaurant;
                         }
                     })
                     .filter((restaurant) => {
-                        if (!Price) {
+                        if (Price.length == 0) {
                             return restaurant;
                         }
 
-                        if (restaurant.price_point == Price.length) {
+                        if (Price.includes(pricePointToPrice(restaurant.price_point))) {
                             return restaurant;
                         }
                     })
@@ -57,6 +63,19 @@ export function getRestaurants({ Meal = null, Cuisine = null, Distance = "", Amb
                         return Object.assign({}, restaurant, {
                             distanceFromUser: getDistanceFromLatLonInKm(parseFloat(latitude), parseFloat(longitude), parseFloat(restaurant.latitude), parseFloat(restaurant.longitude))
                         });
+                    })
+                    .filter((restaurant) => {
+                        if(Ambience.length == 0) {
+                            return restaurant;
+                        }
+                        
+                        let splitAmbiences = Array.every((ambience) => {
+                            return ambience.split(" and ");
+                        })
+                        
+                        console.log(splitAmbiences);
+                        
+                        return restaurant;
                     })
                     .filter((restaurant) => {
                         if (!Distance) {
@@ -74,12 +93,12 @@ export function getRestaurants({ Meal = null, Cuisine = null, Distance = "", Amb
 }
 
 function getPicLinks(restaurants) {
-    let restos = [];
     return (dispatch) => {
         
         let rs = restaurants.map((r, i) => {
             r.links = [];
-            [1,2,3,4].map((n) => {
+            //image names
+            [1,2,3,4,9].map((n) => {
                 storage.child(`${r.name}/${n}.jpg`).getDownloadURL().then((url) => {
                     r.links = r.links.concat(url);
                 })

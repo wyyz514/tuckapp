@@ -56,7 +56,7 @@
     width: 100%;
     position: absolute;
     left: 0;
-    top: 75%;
+    top: 50vh;
     transition: all 0.5s ease-in-out;
     height: 100vh;
     background-color: #fff;
@@ -101,13 +101,17 @@
     height: 100% !important;
 }
 
-[class^="slider-control"] {
-    display: none;
-}
-
 .restoImages {
-    height: 100vh;
+    height: 50vh;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.slider-control-centerleft, .slider-control-centerright {
+    display: none;
+}
+
+.slider-control-bottomcenter {
+    top: 45%;
 }
