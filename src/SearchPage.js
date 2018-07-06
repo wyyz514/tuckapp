@@ -18,7 +18,8 @@ class SearchPage extends Component {
         super(props);
         this.state = {
             searchCounter: 0,
-            filters: {}
+            filters: {},
+            renderedRestaurants: 0
         };
         
         this.setFilter = this.setFilter.bind(this);
@@ -37,11 +38,11 @@ class SearchPage extends Component {
             return <div className="results-empty">Sorry, we couldn't find any restaurants. Please try modifying your search.</div>
         }
 
-        return this.props.restaurants.restaurants.map((restaurant, index) => {
+        
+        return this.props.restaurants.restaurants.slice(0, this.state.renderedRestaurants).map((restaurant, index) => {
             return <ResultCard restaurant={restaurant} key={index} resultActionHandler={() => {this.setSelectedResult(index);}}/>
         })
     }
-
 
     setSelectedResult(id) {
         this.props.dispatch(setSelectedResult(id));
@@ -130,6 +131,14 @@ class SearchPage extends Component {
                 <div className="results-container" id="results">
                     {this.props.restaurants.restaurants && <p style={{textAlign: "center", fontSize:"12px"}} className="green">{(this.props.restaurants.restaurants && this.props.restaurants.restaurants.length) || 0} restaurants found</p>}
                     {this.renderRestaurants()}
+                    {this.props.restaurants.restaurants && <button type="button" className="full-button" onClick = {() => {
+                        this.setState((prevState) =>
+                            {
+                                return {renderedRestaurants: prevState.renderedRestaurants + 5
+                                    
+                            }
+                        
+                    })}}>Load more results</button>}
                 </div>
                 {this.renderResult()}
             </div>
