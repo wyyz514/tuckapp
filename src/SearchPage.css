@@ -19,7 +19,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-#find-restos[disabled] {
+button[disabled] {
   background-color: #cecece;
   border: none;
 }

@@ -19,7 +19,7 @@ class SearchPage extends Component {
         this.state = {
             searchCounter: 0,
             filters: {},
-            renderedRestaurants: 0
+            renderedRestaurants: 5
         };
         
         this.setFilter = this.setFilter.bind(this);
@@ -138,9 +138,9 @@ class SearchPage extends Component {
                                     
                             }
                         
-                    })}}>Load more results</button>}
+                    })}} disabled={this.state.renderedRestaurants >= this.props.restaurants.restaurants.length - 1 ? 'disabled' : ''}>See more</button>}
                 </div>
-                
+                {this.renderResult()}
             </div>
         );
     }
