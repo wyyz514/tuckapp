@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './SearchPage.css';
 import { getRestaurants } from './actionCreators/getRestaurants';
 import { setSelectedResult } from './actionCreators/setSelectedResult';
-
+import Navbar from './Navbar';
 import Form, { FormSection } from './Form';
 import Result from './Result';
 import ResultCard from './ResultCard';
@@ -95,12 +95,11 @@ class SearchPage extends Component {
     render() {
         return (
             <div>
-                <div className="splash-container"></div>
+                <Navbar />
                 <div className="search-page-container" ref={(el) => {this.searchPageContainerEl = el;}}>
                     <ScrollToTop showUnder={300}>
                         <div className="up-button">Back to top</div>
                     </ScrollToTop>
-                    <h2>Find a restaurant</h2>
                     <Form>
                         <FormSection name="Meal" options={[...MEAL_TYPES]} changeHandler={this.setFilter}>
                         </FormSection>
@@ -131,7 +130,7 @@ class SearchPage extends Component {
                                     
                             }
                         
-                    })}} disabled={this.state.renderedRestaurants >= this.props.restaurants.restaurants.length - 1 ? 'disabled' : ''}>Load more restaurants</button>}
+                    })}} disabled={this.state.renderedRestaurants >= this.props.restaurants.restaurants.length  ? 'disabled' : ''}>Load more restaurants</button>}
                 </div>
                 {this.renderResult()}
             </div>

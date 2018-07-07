@@ -29,7 +29,7 @@ class Home extends Component {
     return (
       <div className="home-container">
         <div className="home-title-container">
-          <h1>FoodApp</h1>
+          <img src="/TuckLogo.PNG" />
         </div>
         <div className="home-checkbox-container">
           <div>

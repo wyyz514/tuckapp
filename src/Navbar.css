@@ -1,0 +1,23 @@
+.navbar {
+    background-color: #fff;
+    height: 4em;
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    align-items: center;
+}
+
+.navbarLogo {
+    height: 3em;
+    width: 3em;
+}
+
+.navbarLogo img {
+    height: 100%;
+    width: 100%;
+}

@@ -1,7 +1,7 @@
 .search-page-container {
   width: 100%;
   max-width: 768px;
-  margin: auto;
+  margin: 5em auto;
   height: auto;
   padding: 15px;
   box-sizing: border-box;
@@ -41,10 +41,10 @@ button[disabled] {
   left: 69%;
   background-color: #fff;
   font-size: 14px;
-  color: royalblue;
+  color: #1fa69a;
   padding: 5px;
   box-sizing: border-box;
-  border: 1px solid royalblue;
+  border: 1px solid #1fa69a;
   border-radius: 3px;
   text-align: center;
 }

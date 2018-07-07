@@ -7,6 +7,7 @@
     background-color: #fff;
     padding: 10px;
     box-sizing: border-box;
+    z-index: 2;
     max-width: 768px;
 }
 
@@ -119,15 +120,21 @@
     line-height: 14px;
     color: rgba(0, 0, 0, 0.65);
     letter-spacing: 0.03em;
-    height: 24em;
+    height: 21em;
     overflow: scroll;
-    padding-bottom: 10px;
 }
 
 .result-actions {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    position: fixed;
+    top: 86%;
+    height: 6em;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    background-color: #fff;
 }
 
 .small-button {
@@ -138,11 +145,11 @@
     width: 8em;
     text-align: center;
     background-color: transparent !important;
-    border: 1px solid royalblue;
+    border: 1px solid #1fa69a;
 }
 
 .small-button a {
-    color: royalblue;
+    color: #1fa69a;
 }
 
 .small-button[disabled] {

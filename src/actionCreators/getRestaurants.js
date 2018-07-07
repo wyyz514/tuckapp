@@ -74,17 +74,15 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
             let startTime = _startTime.slice(0, _startTime.length - 3).split(":");
             let endTime   = _endTime.slice(0, _endTime.length - 3).split(":"); 
             
-            let startTimeHour   = isAM(_startTime) ? (startTime[0] === "12" ? 0 :parseInt(startTime[0])) : (startTime[0] === "12" ? 12 : parseInt(startTime[0]) + 12);
+            let startTimeHour   = isAM(_startTime) ? (startTime[0].trim() === "12" ? 0 :parseInt(startTime[0])) : (startTime[0].trim() === "12" ? 12 : parseInt(startTime[0]) + 12);
             let startTimeMinute = startTime[1];
             
             
-            let endTimeHour     = isAM(_endTime) ? (endTime[0] === "12" ? 0 :parseInt(endTime[0])) : (endTime[0] === "12" ? 12 : parseInt(endTime[0]) + 12);
+            let endTimeHour     = isAM(_endTime) ? (endTime[0].trim() === "12" ? 0 :parseInt(endTime[0])) : (endTime[0].trim() === "12" ? 12 : parseInt(endTime[0]) + 12);
             let endTimeMinute   = endTime[1];
             
-            let momentStartTime = moment().hours((startTimeHour == 12 ? 0 : startTimeHour)).minutes(startTimeMinute);
-            let momentEndTime   = moment().hours((endTimeHour == 12 ? 0 : endTimeHour)).minutes(endTimeMinute);
-            
-            
+            let momentStartTime = moment().hours(startTimeHour).minutes(startTimeMinute);
+            let momentEndTime   = moment().hours(endTimeHour).minutes(endTimeMinute);
             
             if(startTimeHour == 0) {
                 momentStartTime = momentStartTime.add(1, 'day');
