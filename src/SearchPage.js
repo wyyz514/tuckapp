@@ -140,7 +140,7 @@ class SearchPage extends Component {
                         
                     })}}>Load more results</button>}
                 </div>
-                {this.renderResult()}
+                
             </div>
         );
     }
