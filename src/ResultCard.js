@@ -1,5 +1,6 @@
 import React from 'react';
 import './ResultCard.css';
+import {storage} from './DB';
 
 const truncate = (str) => {
     return str.substr(0, 175) + "...";
@@ -8,13 +9,21 @@ const truncate = (str) => {
 class ResultCard extends React.Component {
     constructor(props) {
         super(props);
+        
+        this.state = {
+            url: ''
+        };
+        
+        storage.child(`${props.restaurant.name}/9.jpg`).getDownloadURL().then((url) => {
+            this.setState({url})
+        })
     }
     
     render() {
         return (
         <div className="result-card-wrap">
             <div className="result-card">
-                <div className="result-image" style={{backgroundImage: `url(${this.props.restaurant.links[this.props.restaurant.links.length - 1]}`}}></div>
+                <div className="result-image" style={{backgroundImage: `url(${this.state.url}`}}></div>
                 <div className="result-blurb">
                     <div className="result-blurb-head">
                         <span>{this.props.restaurant.name}</span>

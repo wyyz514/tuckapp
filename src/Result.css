@@ -71,14 +71,6 @@
 
 .result-info h2, .result-info h5 {
     margin: 2px;
-    letter-spacing: 0.005rem;
-}
-
-.result-info p {
-    
-    font-size: 12px;
-    line-height: 14px;
-    color: rgba(0, 0, 0, 0.65);
     letter-spacing: 0.03em;
 }
 
@@ -98,6 +90,7 @@
     border-radius: 4px;
     border: 1px solid #81c784;
     color: #81c784;
+    letter-spacing: 0.03em;
     
 }
 
@@ -122,4 +115,40 @@
 
 .result-description {
     white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(0, 0, 0, 0.65);
+    letter-spacing: 0.03em;
+    height: 24em;
+    overflow: scroll;
+    padding-bottom: 10px;
+}
+
+.result-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.small-button {
+    appearance: none;
+    outline: none;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 8em;
+    text-align: center;
+    background-color: transparent !important;
+    border: 1px solid royalblue;
+}
+
+.small-button a {
+    color: royalblue;
+}
+
+.small-button[disabled] {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.small-button[disabled] a {
+    color: rgba(0, 0, 0, 0.5);
 }

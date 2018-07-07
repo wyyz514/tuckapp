@@ -189,29 +189,11 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                        return setStatus(restaurant, moment().format('ddd'));
                     })
                     
-                    dispatch(getPicLinks(filteredRestaurants));
+                    dispatch(getRestaurantsSuccess(filteredRestaurants));
             });
     })
 }
 
-function getPicLinks(restaurants) {
-    return (dispatch) => {
-        
-        let rs = restaurants.map((r, i) => {
-            r.links = [];
-            //image names
-            [1,2,3,4,9].map((n) => {
-                storage.child(`${r.name}/${n}.jpg`).getDownloadURL().then((url) => {
-                    r.links = r.links.concat(url);
-                })
-            });
-            
-            return r;
-        })
-        
-        dispatch(getRestaurantsSuccess(rs));
-    }
-}
 //dispatch(getRestaurantsSuccess(filteredRestaurants));
 
 function getRestaurantsSuccess(restaurants) {

@@ -1,13 +1,25 @@
 import React from 'react';
 import './Result.css';
 import Carousel from 'nuka-carousel';
+import {storage} from './DB';
 
 class Result extends React.Component {
     constructor(props) {
         super(props);
+        
         this.state = {
-            isExpanded: false
+            isExpanded: false, 
+            urls: []
         };
+        
+        
+        [1,2,3,4,9].map((i) => {
+            storage.child(`${props.restaurant.name}/${i}.jpg`).getDownloadURL().then((url) => {
+                this.setState((prevState) => {
+                    return {urls: prevState.urls.concat(url)}
+                })  
+            })
+        });
     }
     
     expandHandler() {
@@ -17,7 +29,7 @@ class Result extends React.Component {
     }
     
     renderImages() {
-        return this.props.restaurant.links.map((link, index) => {
+        return this.state.urls.map((link, index) => {
             return <div style={{backgroundImage: `url(${link})`}} className="restoImages" key={index}/>;
         })    
     }
@@ -38,9 +50,20 @@ class Result extends React.Component {
                 <h5 className="grey">
                     <span>{this.props.restaurant.price_range}</span>&nbsp;|&nbsp;<span className={this.props.restaurant.isOpen ? 'green' : 'red'}>{this.props.restaurant.isOpen ? (this.props.restaurant.isOpen24hrs ? "Open 24 hrs" : (this.props.restaurant.untilTime ? "Open now until " + this.props.restaurant.untilTime : ""))  : ((this.props.restaurant.untilTime ? "Closed now until " + this.props.restaurant.untilTime : "Closed now"))}</span>
                 </h5><br/>
-                <p className="result-description">
+                <div className="result-description">
                     {this.props.restaurant.description}
-                </p>
+                </div>
+                <div className="result-actions">
+                    <button className="small-button" disabled={!this.props.restaurant['Menu Link'] ? 'disabled' : ''}>
+                        <a target="_blank" href={this.props.restaurant['Menu Link'] ? this.props.restaurant['Menu Link'] : "#"}>Menu</a>
+                    </button>
+                    <button className="small-button" disabled={!this.props.restaurant['Map Link'] ? 'disabled' : ''}>
+                        <a target="_blank" href={this.props.restaurant['Map Link'] ? this.props.restaurant['Map Link'] : "#"}>Map</a>
+                    </button>
+                    <button className="small-button" disabled={!this.props.restaurant['Booking Link'] ? 'disabled' : ''}>
+                        <a target="_blank" href={this.props.restaurant['Booking Link'] ? this.props.restaurant['Booking Link'] : "#"}>Book</a>
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -7,6 +7,7 @@ import { setSelectedResult } from './actionCreators/setSelectedResult';
 import Form, { FormSection } from './Form';
 import Result from './Result';
 import ResultCard from './ResultCard';
+import ScrollToTop from 'react-scroll-up';
 
 const MEAL_TYPES = ['breakfast', 'lunch', 'brunch', 'dinner'];
 const PRICE_TYPES = ['$', '$$', '$$$', '$$$$'];
@@ -19,7 +20,7 @@ class SearchPage extends Component {
         this.state = {
             searchCounter: 0,
             filters: {},
-            renderedRestaurants: 5
+            renderedRestaurants: 0
         };
         
         this.setFilter = this.setFilter.bind(this);
@@ -37,33 +38,23 @@ class SearchPage extends Component {
         if (this.props.restaurants.restaurants.length == 0) {
             return <div className="results-empty">Sorry, we couldn't find any restaurants. Please try modifying your search.</div>
         }
-
         
-        return this.props.restaurants.restaurants.slice(0, this.state.renderedRestaurants).map((restaurant, index) => {
-            return <ResultCard restaurant={restaurant} key={index} resultActionHandler={() => {this.setSelectedResult(index);}}/>
+        let resultsToRender = this.props.restaurants.restaurants.slice(0, this.state.renderedRestaurants)
+        
+        return resultsToRender.map((restaurant, index) => {
+            return <ResultCard restaurant={restaurant} links={restaurant.links} key={index} resultActionHandler={() => {this.setSelectedResult(index);}} />
         })
     }
 
     setSelectedResult(id) {
         this.props.dispatch(setSelectedResult(id));
     }
-
+    
     renderResult() {
         if (this.props.resultId.resultId > -1) {
             return <Result closeHandler={() => {this.setSelectedResult(-1)}} restaurant={this.props.restaurants.restaurants[this.props.resultId.resultId]} />
         }
         return ""
-    }
-
-    componentDidMount() {
-        window.addEventListener('scroll', (e) => {
-            if (window.pageYOffset > 300) {
-                this.setState({ upButtonVisible: true });
-            }
-            else {
-                this.setState({ upButtonVisible: false });
-            }
-        });
     }
 
     setFilter(e, isMultiple) {
@@ -100,13 +91,15 @@ class SearchPage extends Component {
                (this.state.filters.Ambience && this.state.filters.Ambience.length > 0)
                 
     }
-    
+
     render() {
         return (
             <div>
                 <div className="splash-container"></div>
                 <div className="search-page-container" ref={(el) => {this.searchPageContainerEl = el;}}>
-                    {this.state.upButtonVisible && <div className="up-button" onClick={()=>{window.scrollTo(0,0)}}>Back to top</div>}
+                    <ScrollToTop showUnder={300}>
+                        <div className="up-button">Back to top</div>
+                    </ScrollToTop>
                     <h2>Find a restaurant</h2>
                     <Form>
                         <FormSection name="Meal" options={[...MEAL_TYPES]} changeHandler={this.setFilter}>
@@ -123,9 +116,9 @@ class SearchPage extends Component {
                         </FormSection>
                         <FormSection options={[]}>
                                 <button type="button" id="find-restos" className="full-button" disabled={this.shouldEnableButton() ? '' : 'disabled'} onClick={() => {this.getRestaurants(); this.setState((prevState) => {
-                                    return {searchCounter: prevState.searchCounter + 1, hasSearched: true};
+                                    return {searchCounter: prevState.searchCounter + 1, hasSearched: true, renderedRestaurants: 5};
                                 });}}><a href="#results">Find restaurants</a></button>
-                        </FormSection>
+                        </FormSection> 
                     </Form>
                 </div>
                 <div className="results-container" id="results">
