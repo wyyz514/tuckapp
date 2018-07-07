@@ -51,7 +51,7 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
         }
         
         function setStatusHelper(times, index) {
-            console.log(times)
+            
             if(typeof times == 'string') {
                 if(times.toLowerCase() === 'open 24 hours') {
                     return Object.assign({}, restaurant, {isOpen: true, isOpen24hrs: true})   
@@ -95,15 +95,19 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
             }
             
             if(moment().diff(momentStartTime) < 0) {
-                return Object.assign({}, restaurant, {isOpen: false});
+                return Object.assign({}, restaurant, {isOpen: false, untilTime: _startTime});
             }
             
             if(moment().diff(momentStartTime) >= 0 && moment().diff(momentEndTime) < 0) {
-                return Object.assign({}, restaurant, {isOpen: true});
+                return Object.assign({}, restaurant, {isOpen: true, untilTime: _endTime});
             }
             
             if(moment().diff(momentStartTime) >= 0 && moment().diff(momentEndTime) > 0) {
-                return setStatusHelper(times, index + 1);
+                if(times.length - 1 == index) {
+                    return Object.assign({}, restaurant, {isOpen: false, untilTime: _startTime}); 
+                }
+                else
+                    return setStatusHelper(times, index + 1);
             }
             
             
