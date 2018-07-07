@@ -36,7 +36,7 @@ class Result extends React.Component {
                 <h2>{this.props.restaurant.name}</h2>
                 <h5 className="grey">{this.props.restaurant.address}</h5>
                 <h5 className="grey">
-                    <span>{this.props.restaurant.price_range}</span>&nbsp;|&nbsp;<span className={this.props.restaurant.isOpen ? 'green' : 'red'}>{this.props.restaurant.isOpen ? "Open now" : "Closed now"}</span>
+                    <span>{this.props.restaurant.price_range}</span>&nbsp;|&nbsp;<span className={this.props.restaurant.isOpen ? 'green' : 'red'}>{this.props.restaurant.isOpen ? (this.props.restaurant.isOpen24hrs ? "Open 24 hrs" : "Open now") : "Closed now"}</span>
                 </h5><br/>
                 <p className="result-description">
                     {this.props.restaurant.description}

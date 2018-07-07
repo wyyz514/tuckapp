@@ -138,7 +138,7 @@ class SearchPage extends Component {
                                     
                             }
                         
-                    })}} disabled={this.state.renderedRestaurants >= this.props.restaurants.restaurants.length - 1 ? 'disabled' : ''}>See more</button>}
+                    })}} disabled={this.state.renderedRestaurants >= this.props.restaurants.restaurants.length - 1 ? 'disabled' : ''}>Load more restaurants</button>}
                 </div>
                 {this.renderResult()}
             </div>

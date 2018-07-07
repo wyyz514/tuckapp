@@ -76,10 +76,10 @@
 
 .result-info p {
     
-    font-size: 13px;
+    font-size: 12px;
     line-height: 14px;
     color: rgba(0, 0, 0, 0.65);
-    font-weight: bold;
+    letter-spacing: 0.03em;
 }
 
 .green {

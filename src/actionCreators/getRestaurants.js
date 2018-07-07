@@ -36,14 +36,32 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
     
     
     function setStatus(restaurant, shortDay) {
-        console.log(restaurant)
-        let times = JSON.parse(restaurant[`working_hours__${shortDay}`]);   
+        let times = [];
+        
+        try {
+            times = JSON.parse(restaurant[`working_hours__${shortDay}`]);   
+        }catch(e) {
+            
+            times = restaurant[`working_hours__${shortDay}`];
+            
+        }
         
         function isAM(time) {
             return time.slice(-3).trim() === "am";
         }
         
         function setStatusHelper(times, index) {
+            console.log(times)
+            if(typeof times == 'string') {
+                if(times.toLowerCase() === 'open 24 hours') {
+                    return Object.assign({}, restaurant, {isOpen: true, isOpen24hrs: true})   
+                }
+                
+                if(times.toLowerCase() === "closed" || times.toLowerCase() === "na") {
+                    return Object.assign({}, restaurant, {isOpen: false});
+                }
+            }
+            
             if(!times[index]) {
                 return Object.assign({}, restaurant, {isOpen: false});
             }
