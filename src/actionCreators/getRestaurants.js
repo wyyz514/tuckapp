@@ -90,10 +90,16 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                 momentStartTime = momentStartTime.add(1, 'day');
             }
             
+            if(isAM(_startTime) && isAM(_endTime)) {
+                if(startTimeHour > endTimeHour) {
+                    momentEndTime = momentEndTime.add(1, 'day');
+                }    
+            }
+            
             if(endTimeHour == 0) {
                 momentEndTime = momentEndTime.add(1, 'day');
             }
-            
+                        
             if(moment().diff(momentStartTime) < 0) {
                 return Object.assign({}, restaurant, {isOpen: false, untilTime: _startTime});
             }

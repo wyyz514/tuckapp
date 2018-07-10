@@ -38,7 +38,7 @@
 
 .result-blurb-head span {
     
-    font-size: 14px; 
+    font-size: 13px; 
     font-weight: 700;
 }
 
@@ -61,9 +61,8 @@
 .result-action {
     border-top: 1px solid #cecece;
     color: #1fa69a;
-    
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     line-height: 3.4em;
 }

@@ -1,0 +1,79 @@
+.overlay {
+    height: 0;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: all 0.5s;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.overlay.active {
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
+.working-hours-container {
+    position: fixed;
+    width: 90%;
+    height: 21.4em;
+    background-color: #fff;
+    top: calc((100% - 21em) / 2);
+    left: 5%;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.working-hours-container.active {
+    opacity: 1;    
+}
+
+.working-hours-list {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    padding: 0;
+    list-style: none;
+}
+
+.working-hours-list li {
+    width: 100%;
+    height: 3em;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.working-hours-list li.active {
+    background-color: #1fa69a;
+    color: #fff;
+}
+
+.working-hours-list li div {
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+}
+
+.working-hours-close-button {
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.working-hours-active {
+    color: #1fa69a;
+    text-decoration: underline;
+}
