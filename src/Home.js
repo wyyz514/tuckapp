@@ -39,9 +39,14 @@ class Home extends Component {
             Grant permission to access location
           </div>
         </div>
-        <button className="home-button" disabled={Object.entries(this.props.location).length === 0 || !this.state.isCheckboxChecked}>
-          <Link to="/search">Search restaurants</Link>
-        </button>
+          <button className="home-button" disabled={Object.entries(this.props.location).length === 0 || !this.state.isCheckboxChecked}>
+            { !(Object.entries(this.props.location).length === 0 || !this.state.isCheckboxChecked) ?
+              <Link to="/search">
+                Search restaurants
+              </Link> :
+              "Search restaurants"
+            }
+          </button>
       </div>
     );
   }

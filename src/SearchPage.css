@@ -1,7 +1,7 @@
 .search-page-container {
   width: 100%;
   max-width: 768px;
-  margin: 5em auto;
+  margin: 5em auto 0 auto;
   height: auto;
   padding: 15px;
   box-sizing: border-box;
@@ -40,7 +40,7 @@ button[disabled] {
   width: 7em;
   left: 69%;
   background-color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   color: #1fa69a;
   padding: 5px;
   box-sizing: border-box;
@@ -49,7 +49,7 @@ button[disabled] {
   text-align: center;
 }
 
-button a {
+a button {
   text-decoration: none;
   color: #fff;
 }
@@ -58,4 +58,12 @@ button a {
   width: 100%;
   height: 24em;
   background-color: #000;
+}
+
+.freeze {
+  overflow: hidden;
+}
+
+.results-container .full-button {
+  margin-top: 50px;
 }

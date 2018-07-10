@@ -16,6 +16,12 @@
     min-height: 4em;
 }
 
+.flexed-form-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
 label {
     text-indent: 15px;
     margin-bottom: 5px;
@@ -51,7 +57,6 @@ input[type='range'] {
     border: 1px solid #1fa69a;
     background-color: #fff;
     color: #1fa69a;
-    font-size: 14px;
     font-weight: 300;
 }
 
@@ -74,15 +79,17 @@ input[type='range'] {
 }
 
 button {
+    text-transform: capitalize;
+    letter-spacing: 0.03em;
+    font-size: 13px !important;
     outline: none;
 }
 
 .title-smallbutton {
     display: flex;
     justify-content: space-between;
-    text-transform: uppercase;
+    letter-spacing: 0.03em;
     margin-bottom: 10px;
     font-weight: bold;
     font-size: 14px;
 }
-

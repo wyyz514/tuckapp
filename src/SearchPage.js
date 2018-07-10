@@ -12,7 +12,7 @@ import ScrollToTop from 'react-scroll-up';
 const MEAL_TYPES = ['breakfast', 'lunch', 'brunch', 'dinner'];
 const PRICE_TYPES = ['$', '$$', '$$$', '$$$$'];
 
-const AMBIENCE_TYPES = ['fun and lively', 'calm and relaxed', 'formal and classy'];
+const AMBIENCE_TYPES = ['fun', 'relaxed', 'classy'];
 
 class SearchPage extends Component {
     constructor(props) {
@@ -52,11 +52,21 @@ class SearchPage extends Component {
     
     renderResult() {
         if (this.props.resultId.resultId > -1) {
-            return <Result closeHandler={() => {this.setSelectedResult(-1)}} restaurant={this.props.restaurants.restaurants[this.props.resultId.resultId]} />
+            this.toggleBodyFreeze();
+            return <Result closeHandler={() => {this.setSelectedResult(-1); this.toggleBodyFreeze();}} restaurant={this.props.restaurants.restaurants[this.props.resultId.resultId]} />
         }
         return ""
     }
-
+    
+    toggleBodyFreeze() {
+        if(document.body.classList.contains('freeze')) {
+            document.body.classList.remove('freeze')
+        }   
+        else {
+            document.body.classList.add('freeze');
+        }
+    }
+    
     setFilter(e, isMultiple) {
         this.setState((prevState) => {
             let selectedFilters = prevState.filters[e.name] || [];
@@ -101,27 +111,28 @@ class SearchPage extends Component {
                         <div className="up-button">Back to top</div>
                     </ScrollToTop>
                     <Form>
-                        <FormSection name="Meal" options={[...MEAL_TYPES]} changeHandler={this.setFilter}>
+                        <FormSection name="Meal" options={[...MEAL_TYPES]} changeHandler={this.setFilter} className="flexed-form-section">
                         </FormSection>
                         
-                        <FormSection name="Price" options={[...PRICE_TYPES]} changeHandler={this.setFilter} multiple={true}>
+                        <FormSection name="Price" options={[...PRICE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section">
                         </FormSection>
                         
-                        <FormSection name="Distance" inputType="range" range={{min:1, max:10}} changeHandler={(e)=>{ let target = e.target; this.setState((prevState) => {return {filters: Object.assign({}, prevState.filters, {Distance: target.value})}; }) }}>
-                            <p>{this.state.filters.Distance || 0} km</p>
+                        <FormSection name="Distance" inputType="range" value={this.state.filters.Distance || 4} range={{min:1, max:10}} changeHandler={(e)=>{ let target = e.target; this.setState((prevState) => {return {filters: Object.assign({}, prevState.filters, {Distance: target.value})}; }) }}>
+                            <p>{this.state.filters.Distance || 4} km</p>
                         </FormSection>
                         
-                        <FormSection name="Ambience" options={[...AMBIENCE_TYPES]} changeHandler={this.setFilter} multiple={true}>
+                        <FormSection name="Ambience" options={[...AMBIENCE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section">
                         </FormSection>
                         <FormSection options={[]}>
-                                <button type="button" id="find-restos" className="full-button" disabled={this.shouldEnableButton() ? '' : 'disabled'} onClick={() => {this.getRestaurants(); this.setState((prevState) => {
-                                    return {searchCounter: prevState.searchCounter + 1, hasSearched: true, renderedRestaurants: 5};
-                                });}}><a href="#results">Find restaurants</a></button>
+                                <a href="#results">
+                                    <button type="button" id="find-restos" className="full-button" disabled={this.shouldEnableButton() ? '' : 'disabled'} onClick={() => {this.getRestaurants(); this.setState((prevState) => {
+                                        return {searchCounter: prevState.searchCounter + 1, hasSearched: true, renderedRestaurants: 5};
+                                    });}}>Find restaurants</button>
+                                </a>
                         </FormSection> 
                     </Form>
                 </div>
                 <div className="results-container" id="results">
-                    {this.props.restaurants.restaurants && <p style={{textAlign: "center", fontSize:"12px"}} className="green">{(this.props.restaurants.restaurants && this.props.restaurants.restaurants.length) || 0} restaurants found</p>}
                     {this.renderRestaurants()}
                     {this.props.restaurants.restaurants && <button type="button" className="full-button" onClick = {() => {
                         this.setState((prevState) =>

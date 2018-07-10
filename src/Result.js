@@ -2,6 +2,7 @@ import React from 'react';
 import './Result.css';
 import Carousel from 'nuka-carousel';
 import {storage} from './DB';
+import ArrowLeft from 'react-icons/lib/io/android-arrow-back'
 
 class Result extends React.Component {
     constructor(props) {
@@ -42,7 +43,9 @@ class Result extends React.Component {
                     {this.renderImages()}
                 </Carousel>
             </div>
-            <div className="result-close-button" onClick={this.props.closeHandler}></div>
+            <div className="result-close-button" onClick={this.props.closeHandler}>
+                <ArrowLeft size={18}/>
+            </div>
             <div className={this.state.isExpanded ? "result-info expanded" : "result-info"}>
                 <div className="expand-toggle" onClick={() => {this.expandHandler();}}>{this.state.isExpanded ? "Minimize" : "Expand"}</div><br/>
                 <h2>{this.props.restaurant.name}</h2>
@@ -54,15 +57,21 @@ class Result extends React.Component {
                     {this.props.restaurant.description}
                 </div>
                 <div className="result-actions">
-                    <button className="small-button" disabled={!this.props.restaurant['Menu Link'] ? 'disabled' : ''}>
-                        <a target="_blank" href={this.props.restaurant['Menu Link'] ? this.props.restaurant['Menu Link'] : "#"}>Menu</a>
-                    </button>
-                    <button className="small-button" disabled={!this.props.restaurant['Map Link'] ? 'disabled' : ''}>
-                        <a target="_blank" href={this.props.restaurant['Map Link'] ? this.props.restaurant['Map Link'] : "#"}>Map</a>
-                    </button>
-                    <button className="small-button" disabled={!this.props.restaurant['Booking Link'] ? 'disabled' : ''}>
-                        <a target="_blank" href={this.props.restaurant['Booking Link'] ? this.props.restaurant['Booking Link'] : "#"}>Book</a>
-                    </button>
+                    <a target="_blank" href={this.props.restaurant['Menu Link'] ? this.props.restaurant['Menu Link'] : "#"}>
+                        <button className="small-button" disabled={!this.props.restaurant['Menu Link'] ? 'disabled' : ''}>
+                            Menu
+                        </button>
+                    </a>
+                    <a target="_blank" href={this.props.restaurant['Map Link'] ? this.props.restaurant['Map Link'] : "#"}>
+                        <button className="small-button" disabled={!this.props.restaurant['Map Link'] ? 'disabled' : ''}>
+                            Map
+                        </button>
+                    </a>
+                    <a target="_blank" href={this.props.restaurant['Booking Link'] ? this.props.restaurant['Booking Link'] : "#"}>
+                        <button className="small-button" disabled={!this.props.restaurant['Booking Link'] ? 'disabled' : ''}>
+                            Book
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,5 +1,7 @@
 import { base, storage } from '../DB';
 import * as moment from 'moment';
+import shuffle from 'shuffle-array';
+
 export const GET_RESTAURANTS_QUERY = 'GET_RESTAURANTS_QUERY';
 export const GET_RESTAURANTS_SUCCESS = 'GET_RESTAURANTS_SUCCESS';
 
@@ -179,7 +181,7 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                             return restaurant;
                         }
 
-                        if (restaurant.distanceFromUser <= parseInt(Distance)) {
+                        if (restaurant.distanceFromUser <= parseFloat(Distance)) {
                             return restaurant;
                         }
                     })
@@ -187,7 +189,7 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambienc
                        return setStatus(restaurant, moment().format('ddd'));
                     })
                     
-                    dispatch(getRestaurantsSuccess(filteredRestaurants));
+                    dispatch(getRestaurantsSuccess(shuffle(filteredRestaurants)));
             });
     })
 }
