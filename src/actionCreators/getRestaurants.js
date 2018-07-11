@@ -96,7 +96,7 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = 4, Ambience
                 }    
             }
             
-            if(endTimeHour == 0) {
+            if(( !isAM(_startTime) && isAM(_endTime) ) || endTimeHour == 0) {
                 momentEndTime = momentEndTime.add(1, 'day');
             }
                         

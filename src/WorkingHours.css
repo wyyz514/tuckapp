@@ -22,12 +22,8 @@
     background-color: #fff;
     top: calc((100% - 21em) / 2);
     left: 3.5%;
-    opacity: 0;
+    opacity: 1;
     transition: all 0.1s;
-}
-
-.working-hours-container.active {
-    opacity: 1;    
 }
 
 .working-hours-list {
