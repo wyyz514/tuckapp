@@ -89,13 +89,13 @@ class Result extends React.Component {
                 <ArrowLeft size={25}/>
             </div>
             <div className={this.state.isExpanded ? "result-info expanded" : "result-info"}>
-                <div className="expand-toggle" onClick={() => {this.expandHandler();}}>{this.state.isExpanded ? "Minimize" : "Expand"}</div><br/>
+                <div className="expand-toggle" onClick={() => {this.expandHandler();}}>{this.state.isExpanded ? "Minimize" : "Expand"}</div>
                 <h2>{this.props.restaurant.name}</h2>
                 <h6 className="grey">{this.props.restaurant.address}</h6>
                 <h6 className="grey">
                     <span>{this.props.restaurant.price_range}</span>&nbsp;|&nbsp;<span className={this.props.restaurant.isOpen ? 'green' : 'red'}>{this.props.restaurant.isOpen ? (this.props.restaurant.isOpen24hrs ? "Open 24 hrs" : (this.props.restaurant.untilTime ? "Open now until " + this.props.restaurant.untilTime : ""))  : ((this.props.restaurant.untilTime ? "Closed now until " + this.props.restaurant.untilTime : "Closed now"))}</span>
                     &nbsp;|&nbsp;<span className="working-hours-active" onClick={() => {this.toggleWorkingHoursModal();}}>View working hours</span>
-                </h6><br/>
+                </h6>
                 <div className="result-description">
                     {this.props.restaurant.description}
                 </div>

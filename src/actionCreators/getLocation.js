@@ -1,7 +1,7 @@
 export const GET_LOCATION_QUERY = "GET_LOCATION_QUERY";
 export const GET_LOCATION_SUCCESS = "GET_LOCATION_SUCCESS";
 
-function getLocationSuccess(location) {
+export function getLocationSuccess(location) {
     return {
         type: GET_LOCATION_SUCCESS,
         location: location.coords
@@ -22,7 +22,7 @@ export function getLocation() {
 
         let options = {
             enableHighAccuracy: false,
-            timeout: 5000,
+            timeout: 15000,
             maximumAge: 0
         };
         

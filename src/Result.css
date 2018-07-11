@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .result-pictures {
@@ -80,6 +81,7 @@
     padding: 3px;
     text-align: center;
     width: 6em;
+    margin-bottom: 7px;
     font-size: 12px;
     border-radius: 3px;
     border: 1px solid #1fa69a;
@@ -111,9 +113,10 @@
     white-space: pre-wrap;
     font-size: 12px;
     line-height: 14px;
+    margin-top: 15px;
     color: rgba(0, 0, 0, 0.65);
     letter-spacing: 0.03em;
-    height: 20em;
+    height: 15em;
     overflow: scroll;
 }
 

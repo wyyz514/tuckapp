@@ -1,7 +1,6 @@
 import React from 'react';
 import './WorkingHours.css';
 import moment from 'moment';
-import IOClose from 'react-icons/lib/io/close';
 
 const WorkingHoursItem = (props) => {
     let {day, hours} = props.time;
@@ -23,7 +22,7 @@ export default class WorkingHours extends React.Component {
     render() {
         return <div className={`${this.props.active ? "overlay active" : "overlay"}`}>
             <div className="working-hours-close-button" onClick={this.props.closeHandler}>
-                <IOClose size={20} />
+                
             </div>
             <div className={`${this.props.active ? "working-hours-container active" : "working-hours-containe"}`}>
                 <ul className="working-hours-list">

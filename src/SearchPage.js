@@ -42,7 +42,7 @@ class SearchPage extends Component {
         let resultsToRender = this.props.restaurants.restaurants.slice(0, this.state.renderedRestaurants)
         
         return resultsToRender.map((restaurant, index) => {
-            return <ResultCard restaurant={restaurant} links={restaurant.links} key={index} resultActionHandler={() => {this.setSelectedResult(index);}} />
+            return <ResultCard restaurant={restaurant} links={restaurant.links} key={restaurant.name} resultActionHandler={() => {this.setSelectedResult(index);}} />
         })
     }
 
