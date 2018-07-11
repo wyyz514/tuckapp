@@ -49,18 +49,12 @@ export default class LocationInput extends React.Component {
             {suggestions.length > 0 && <div className="autocomplete-dropdown-container">
               {loading && <div style={{fontSize: "12px", color: "#cecece", margin: "8px"}}>Loading...</div>}
               {suggestions.slice(0, 5).map(suggestion => {
-                const className = suggestion.active
-                  ? 'suggestion-item--active'
-                  : 'suggestion-item';
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                const className = 'suggestion-item';
+                
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
+                      className
                     })}
                   >
                   <span>{suggestion.description.slice(0, 50)}{suggestion.description.length <= 50 ? "" : "..."}</span>
