@@ -5,7 +5,7 @@ import shuffle from 'shuffle-array';
 export const GET_RESTAURANTS_QUERY = 'GET_RESTAURANTS_QUERY';
 export const GET_RESTAURANTS_SUCCESS = 'GET_RESTAURANTS_SUCCESS';
 
-export function getRestaurants({ Meal = [], Cuisine = [], Distance = "", Ambience = [], Price = [] }, { latitude, longitude }) {
+export function getRestaurants({ Meal = [], Cuisine = [], Distance = 4, Ambience = [], Price = [] }, { latitude, longitude }) {
 
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
         var R = 6371; // Radius of the earth in km
