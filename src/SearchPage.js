@@ -12,7 +12,7 @@ import ScrollToTop from 'react-scroll-up';
 const MEAL_TYPES = ['breakfast', 'lunch', 'brunch', 'dinner'];
 const PRICE_TYPES = ['$', '$$', '$$$', '$$$$'];
 
-const AMBIENCE_TYPES = ['fun', 'relaxed', 'classy'];
+const AMBIENCE_TYPES = ['lively', 'relaxed', 'formal'];
 
 class SearchPage extends Component {
     constructor(props) {
