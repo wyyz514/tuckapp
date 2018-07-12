@@ -21,11 +21,11 @@ class Home extends Component {
 
   dispatchGetLocation(e) {
     if (e.target.checked) {
-      this.setState({ isCheckboxChecked: true});
+      this.setState({ isCheckboxChecked: true });
       this.props.dispatch(getLocation())
     }
     else {
-      this.setState({ isCheckboxChecked: false});
+      this.setState({ isCheckboxChecked: false });
     }
   }
 
@@ -60,21 +60,24 @@ class Home extends Component {
 }
 
 const HomeButton = props => {
-  return (
+  if (props.isEnabled) {
+    return (
+      <Link to="/search">
+        <button className="home-button">
+          Search restaurants
+        </button>
+      </Link>);
+  }
+  else {
 
-    <button className="home-button" disabled={!props.isEnabled}>
-            {props.isEnabled ?
-              <Link to="/search">
-                Search restaurants
-              </Link> :
-              "Search restaurants"
-            }
-          
-    </button>
-  );
+    return <button className="home-button" disabled={!props.isEnabled}>
+        Search restaurants
+      </button>
+  }
 }
 
 function mapStateToProps({ location }) {
+  localStorage.setItem('location', JSON.stringify(location));
   return { location };
 }
 

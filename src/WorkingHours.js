@@ -24,7 +24,7 @@ export default class WorkingHours extends React.Component {
             <div className="working-hours-close-button" onClick={this.props.closeHandler}>
                 
             </div>
-            <div className={`${this.props.active ? "working-hours-container active" : "working-hours-containe"}`}>
+            <div className={`${this.props.active ? "working-hours-container active" : "working-hours-container"}`}>
                 <ul className="working-hours-list">
                     {this.props.hours.map((h, i) => {
                         return <WorkingHoursItem time={h} key={i}/>

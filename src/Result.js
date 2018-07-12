@@ -4,6 +4,7 @@ import Carousel from 'nuka-carousel';
 import { storage } from './DB';
 import ArrowLeft from 'react-icons/lib/io/ios-arrow-thin-left'
 import WorkingHours from './WorkingHours';
+import DirectionsMap from './DirectionsMap';
 
 class Result extends React.Component {
     constructor(props) {
@@ -12,12 +13,13 @@ class Result extends React.Component {
         this.state = {
             isExpanded: false,
             workingHoursModalActive: false,
+            mapsModalActive: false,
             urls: []
         };
 
         this.buildWorkingHours = this.buildWorkingHours.bind(this);
 
-        [1, 2, 3, 4, 9].map((i) => {
+        [1, 2, 3, 4, 5].map((i) => {
             storage.child(`${props.restaurant.name}/${i}.jpg`).getDownloadURL().then((url) => {
                 this.setState((prevState) => {
                     return { urls: prevState.urls.concat(url) }
@@ -33,7 +35,8 @@ class Result extends React.Component {
     }
 
     renderImages() {
-        return this.state.urls.map((link, index) => {
+        return this.state.urls
+        .map((link, index) => {
             return <div style={{backgroundImage: `url(${link})`}} className="restoImages" key={index}/>;
         })
     }
@@ -76,10 +79,17 @@ class Result extends React.Component {
         })    
     }
     
+    toggleMapsModal() {
+        this.setState((prevState) => {
+            return {mapsModalActive: !prevState.mapsModalActive}
+        })  
+    }
+    
     render() {
         return (
             <div className="result-container">
             <WorkingHours hours={ this.buildWorkingHours() } active={this.state.workingHoursModalActive} closeHandler={ () => {this.toggleWorkingHoursModal()} }/>
+            {this.state.mapsModalActive && <DirectionsMap userLocation={this.props.location} restaurantLocation={{latitude: this.props.restaurant.latitude, longitude: this.props.restaurant.longitude}} closeHandler={() => {this.toggleMapsModal();}}/>}
             <div className="result-pictures">
                 <Carousel>
                     {this.renderImages()}
@@ -98,23 +108,21 @@ class Result extends React.Component {
                 </h6>
                 <div className="result-description">
                     {this.props.restaurant.description}
-                </div>
-                <div className="result-actions">
+                     <div className="result-actions">
                     <a target="_blank" href={this.props.restaurant['Menu Link'] ? this.props.restaurant['Menu Link'] : "#"}>
                         <button className="small-button" disabled={!this.props.restaurant['Menu Link'] ? 'disabled' : ''}>
                             Menu
                         </button>
                     </a>
-                    <a target="_blank" href={this.props.restaurant['Map Link'] ? this.props.restaurant['Map Link'] : "#"}>
-                        <button className="small-button" disabled={!this.props.restaurant['Map Link'] ? 'disabled' : ''}>
+                        <button className="small-button" onClick={() => {this.toggleMapsModal();}}>
                             Map
                         </button>
-                    </a>
                     <a target="_blank" href={this.props.restaurant['Booking Link'] ? this.props.restaurant['Booking Link'] : "#"}>
                         <button className="small-button" disabled={!this.props.restaurant['Booking Link'] ? 'disabled' : ''}>
                             Book
                         </button>
                     </a>
+                </div>
                 </div>
             </div>
         </div>

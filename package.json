@@ -9,6 +9,7 @@
     "re-base": "^3.2.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-google-maps": "^9.4.5",
     "react-icons": "^2.2.7",
     "react-image": "^1.3.1",
     "react-loading-image": "^0.4.0",
@@ -20,6 +21,7 @@
     "react-scroll-into-view": "^1.2.0",
     "react-scroll-up": "^1.3.3",
     "react-swipe": "^5.1.1",
+    "recompose": "^0.27.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "shuffle-array": "^1.0.1"

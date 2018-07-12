@@ -1,25 +1,26 @@
 .search-page-container {
   width: 100%;
   max-width: 768px;
-  margin: 5em auto 0 auto;
+  margin: 4em auto 0 auto;
   height: auto;
   padding: 15px;
   box-sizing: border-box;
 }
 
 .results-container {
-  padding: 15px;
+  padding: 10px;
   box-sizing: border-box;
   max-width: 768px;
   margin: auto;
   min-height: 4em;
   display: flex;
-  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 #find-restos {
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 button[disabled] {
@@ -50,6 +51,7 @@ button[disabled] {
   border: 1px solid #1fa69a;
   border-radius: 3px;
   text-align: center;
+  cursor: pointer;
 }
 
 a button {
@@ -69,4 +71,5 @@ a button {
 
 .results-container .full-button {
   margin-top: 50px;
+  cursor: pointer;
 }

@@ -19,10 +19,14 @@ class SearchPage extends Component {
         super(props);
         this.state = {
             searchCounter: 0,
-            filters: {},
+            filters: {
+                'Price': ['$$', '$$$'],
+                'Ambience': ['lively', 'relaxed']
+            },
+            location: JSON.parse(localStorage.getItem('location')),
             renderedRestaurants: 0
         };
-        
+
         this.setFilter = this.setFilter.bind(this);
     }
 
@@ -38,9 +42,9 @@ class SearchPage extends Component {
         if (this.props.restaurants.restaurants.length == 0) {
             return <div className="results-empty">Sorry, we couldn't find any restaurants. Please try modifying your search.</div>
         }
-        
+
         let resultsToRender = this.props.restaurants.restaurants.slice(0, this.state.renderedRestaurants)
-        
+
         return resultsToRender.map((restaurant, index) => {
             return <ResultCard restaurant={restaurant} links={restaurant.links} key={restaurant.name} resultActionHandler={() => {this.setSelectedResult(index);}} />
         })
@@ -49,57 +53,57 @@ class SearchPage extends Component {
     setSelectedResult(id) {
         this.props.dispatch(setSelectedResult(id));
     }
-    
+
     renderResult() {
         if (this.props.resultId.resultId > -1) {
             this.toggleBodyFreeze();
-            return <Result closeHandler={() => {this.setSelectedResult(-1); this.toggleBodyFreeze();}} restaurant={this.props.restaurants.restaurants[this.props.resultId.resultId]} />
+            return <Result closeHandler={() => {this.setSelectedResult(-1); this.toggleBodyFreeze();}} restaurant={this.props.restaurants.restaurants[this.props.resultId.resultId]} location={this.state.location}/>
         }
         return ""
     }
-    
+
     toggleBodyFreeze() {
-        if(document.body.classList.contains('freeze')) {
+        if (document.body.classList.contains('freeze')) {
             document.body.classList.remove('freeze')
-        }   
+        }
         else {
             document.body.classList.add('freeze');
         }
     }
-    
+
     setFilter(e, isMultiple) {
         this.setState((prevState) => {
             let selectedFilters = prevState.filters[e.name] || [];
-            
+
             if (selectedFilters.indexOf(e.value) > -1) {
                 if (isMultiple) {
-                    let filterIndex    = selectedFilters.indexOf(e.value);
-                    selectedFilters    = selectedFilters.filter((param, index) => {if(index != filterIndex) {return param} });
-                    
+                    let filterIndex = selectedFilters.indexOf(e.value);
+                    selectedFilters = selectedFilters.filter((param, index) => { if (index != filterIndex) { return param } });
+
                     return {
                         filters: { ...prevState.filters, [e.name]: selectedFilters }
                     };
                 }
                 else {
                     return {
-                        filters: {...prevState.filters, [e.name]: []}
+                        filters: { ...prevState.filters, [e.name]: [] }
                     }
                 }
             }
             else {
                 return {
-                    filters: {...prevState.filters, [e.name]: isMultiple ? selectedFilters.concat(e.value): [e.value]}
+                    filters: { ...prevState.filters, [e.name]: isMultiple ? selectedFilters.concat(e.value) : [e.value] }
                 };
             }
         });
     }
-    
+
     shouldEnableButton() {
-        return (this.state.filters.Meal && this.state.filters.Meal.length > 0) || 
-               (this.state.filters.Price && this.state.filters.Price.length > 0) ||
-               (this.state.filters.Distance && parseInt(this.state.filters.Distance) > 0) ||
-               (this.state.filters.Ambience && this.state.filters.Ambience.length > 0)
-                
+        return (this.state.filters.Meal && this.state.filters.Meal.length > 0) ||
+            (this.state.filters.Price && this.state.filters.Price.length > 0) ||
+            (this.state.filters.Distance && parseInt(this.state.filters.Distance) > 0) ||
+            (this.state.filters.Ambience && this.state.filters.Ambience.length > 0)
+
     }
 
     render() {
@@ -114,28 +118,26 @@ class SearchPage extends Component {
                         <FormSection name="Meal" options={[...MEAL_TYPES]} changeHandler={this.setFilter} className="flexed-form-section">
                         </FormSection>
                         
-                        <FormSection name="Price" options={[...PRICE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section">
+                        <FormSection name="Price" options={[...PRICE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section" defaultSelected={[1, 2]}>
                         </FormSection>
                         
                         <FormSection name="Distance" inputType="range" value={this.state.filters.Distance || 4} range={{min:1, max:10}} changeHandler={(e)=>{ let target = e.target; this.setState((prevState) => {return {filters: Object.assign({}, prevState.filters, {Distance: target.value})}; }) }}>
                             <p>{this.state.filters.Distance || 4} km</p>
                         </FormSection>
                         
-                        <FormSection name="Ambience" options={[...AMBIENCE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section">
+                        <FormSection name="Ambience" options={[...AMBIENCE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section" defaultSelected={[0, 1]}>
                         </FormSection>
                         <FormSection options={[]}>
-                                <a href="#results">
                                     <button type="button" id="find-restos" className="full-button" disabled={this.shouldEnableButton() ? '' : 'disabled'} onClick={() => {this.getRestaurants(); this.setState((prevState) => {
                                         return {searchCounter: prevState.searchCounter + 1, hasSearched: true, renderedRestaurants: 5};
                                     });}}>Find restaurants</button>
-                                </a>
                         </FormSection> 
                     </Form>
                 </div>
                 <div className="results-container" id="results">
                     {this.renderRestaurants()}
-                </div>
-                {this.props.restaurants.restaurants && <button type="button" className="full-button" onClick = {() => {
+                    
+                     {this.props.restaurants.restaurants && <button type="button" className="full-button" onClick = {() => {
                         this.setState((prevState) =>
                             {
                                 return {renderedRestaurants: prevState.renderedRestaurants + 5
@@ -143,6 +145,7 @@ class SearchPage extends Component {
                             }
                         
                     })}} disabled={this.state.renderedRestaurants >= this.props.restaurants.restaurants.length  ? 'disabled' : ''}>Load more restaurants</button>}
+                </div>
                 {this.renderResult()}
             </div>
         );
@@ -150,8 +153,8 @@ class SearchPage extends Component {
 }
 
 
-function mapStateToProps({ location, restaurants, resultId }) {
-    return { location, restaurants, resultId };
+function mapStateToProps({restaurants, resultId }) {
+    return {restaurants, resultId };
 }
 
 export default connect(mapStateToProps, null)(SearchPage);

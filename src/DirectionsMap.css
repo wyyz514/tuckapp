@@ -1,0 +1,46 @@
+.map-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 768px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 2;
+}
+
+@media only screen and (min-width: 769px) {
+    .map-container {
+        left: calc((100% - 768px) / 2);
+    }
+}
+
+.map-close-button {
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    top: 10px;
+    left: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.map-close-button:before, .map-close-button:after {
+    content:"";
+    height: 1px;
+    width: 16px;
+    position: absolute;
+    background-color: #000;
+}
+
+.map-close-button:before {
+    transform: rotate(45deg);
+}
+
+.map-close-button:after {
+    transform: rotate(-45deg);
+}

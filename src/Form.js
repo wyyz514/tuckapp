@@ -4,8 +4,9 @@ import './Form.css';
 export class FormSection extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            selectedIds: []
+            selectedIds: props.defaultSelected || []
         };
     }
    

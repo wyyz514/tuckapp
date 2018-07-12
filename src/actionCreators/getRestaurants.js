@@ -186,11 +186,7 @@ export function getRestaurants({ Meal = [], Cuisine = [], Distance = 4, Ambience
                         if (!Distance) {
                             return restaurant;
                         }
-                        
-                        if(!restaurant.distanceFromUser) {
-                            return restaurant;
-                        }
-                        
+
                         if (restaurant.distanceFromUser <= parseFloat(Distance).toFixed(1)) {
                             return restaurant;
                         }
