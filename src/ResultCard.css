@@ -1,6 +1,6 @@
 .result-card-wrap {
-    height: 20em;
-    /*width: 20em;*/
+    height: 22em;
+    width: 325px;
     padding: 10px;
     box-sizing: border-box;
     display: inline-block;
@@ -9,16 +9,15 @@
 
 .result-card {
     height: 100%;
-    width: 85%;
+    width: 260px;
     margin:0 auto;
-    border: 1px solid #cecece;
 }
 
 .result-image {
-    height: 39%;
+    height: 167px;
+    width: 100%;
     border-bottom: 1px solid #cecece;
-    background-color: #cecece;
-    background-size: 100%;
+    background-color: #1fa69a;
     background-repeat: no-repeat;
     background-position: center center;
 }
@@ -26,14 +25,16 @@
 .result-blurb {
     padding: 8px;
     box-sizing: border-box;
-    height: 45%;
+    height: 35%;
+    border-left: 1px solid #cecece;
+    border-right: 1px solid #cecece;
 }
 
 .result-blurb-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
 }
 
 .result-blurb-head span {
@@ -49,7 +50,7 @@
 .result-blurb #blurb {
     font-size: 12px;
     overflow: hidden;
-    margin-top: 25px;
+    margin-top: 10px;
     height: 7em;
     letter-spacing: 0.03em;
 }
@@ -59,7 +60,7 @@
 }
 
 .result-action {
-    border-top: 1px solid #cecece;
+    border: 1px solid #cecece;
     color: #1fa69a;
     text-align: center;
     font-size: 13px;

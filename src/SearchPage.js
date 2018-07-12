@@ -9,7 +9,7 @@ import Result from './Result';
 import ResultCard from './ResultCard';
 import ScrollToTop from 'react-scroll-up';
 
-const MEAL_TYPES = ['breakfast', 'lunch', 'brunch', 'dinner'];
+const MEAL_TYPES = ['breakfast', 'brunch', 'lunch', 'dinner'];
 const PRICE_TYPES = ['$', '$$', '$$$', '$$$$'];
 
 const AMBIENCE_TYPES = ['lively', 'relaxed', 'formal'];
@@ -134,7 +134,8 @@ class SearchPage extends Component {
                 </div>
                 <div className="results-container" id="results">
                     {this.renderRestaurants()}
-                    {this.props.restaurants.restaurants && <button type="button" className="full-button" onClick = {() => {
+                </div>
+                {this.props.restaurants.restaurants && <button type="button" className="full-button" onClick = {() => {
                         this.setState((prevState) =>
                             {
                                 return {renderedRestaurants: prevState.renderedRestaurants + 5
@@ -142,7 +143,6 @@ class SearchPage extends Component {
                             }
                         
                     })}} disabled={this.state.renderedRestaurants >= this.props.restaurants.restaurants.length  ? 'disabled' : ''}>Load more restaurants</button>}
-                </div>
                 {this.renderResult()}
             </div>
         );
