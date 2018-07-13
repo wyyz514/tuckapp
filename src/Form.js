@@ -57,7 +57,7 @@ export class FormSection extends Component {
        return (
         <div className="form-section">
             <div className="title-smallbutton">
-            {this.props.name || ""} {this.props.shouldShowValue && `(${this.props.value} ${this.props.unit})`}
+            {this.props.name || ""}&nbsp;{this.props.shouldShowValue && `(${this.props.value} ${this.props.unit})`}
             </div>
             <div className={`form-section-container ${this.props.className || ""}`} ref={(el) => {this.buttonContainer = el;}}>
                 {this.props.children}
