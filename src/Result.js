@@ -5,6 +5,8 @@ import { storage } from './DB';
 import ArrowLeft from 'react-icons/lib/io/ios-arrow-thin-left'
 import WorkingHours from './WorkingHours';
 import DirectionsMap from './DirectionsMap';
+import ArrowUp from 'react-icons/lib/io/ios-arrow-up';
+import ArrowDown from 'react-icons/lib/io/ios-arrow-down';
 
 class Result extends React.Component {
     constructor(props) {
@@ -99,31 +101,31 @@ class Result extends React.Component {
                 <ArrowLeft size={25}/>
             </div>
             <div className={this.state.isExpanded ? "result-info expanded" : "result-info"}>
-                <div className="expand-toggle" onClick={() => {this.expandHandler();}}>{this.state.isExpanded ? "Minimize" : "Expand"}</div>
+                <div className="expand-toggle" onClick={() => {this.expandHandler();}}>{this.state.isExpanded ?  <ArrowDown size={25} /> : <ArrowUp size={25} />}</div>
                 <h2>{this.props.restaurant.name}</h2>
                 <h6 className="grey">{this.props.restaurant.address}</h6>
                 <h6 className="grey">
                     <span>{this.props.restaurant.price_range}</span>&nbsp;|&nbsp;<span className={this.props.restaurant.isOpen ? 'green' : 'red'}>{this.props.restaurant.isOpen ? (this.props.restaurant.isOpen24hrs ? "Open 24 hrs" : (this.props.restaurant.untilTime ? "Open now until " + this.props.restaurant.untilTime : ""))  : ((this.props.restaurant.untilTime ? "Closed now until " + this.props.restaurant.untilTime : "Closed now"))}</span>
-                    &nbsp;|&nbsp;<span className="working-hours-active" onClick={() => {this.toggleWorkingHoursModal();}}>View working hours</span>
+                    &nbsp;|&nbsp;<span className="working-hours-active" onClick={() => {this.toggleWorkingHoursModal();}}>View full hours</span>
                 </h6>
                 <div className="result-description">
-                    {this.props.restaurant.description}
-                     <div className="result-actions">
-                    <a target="_blank" href={this.props.restaurant['Menu Link'] ? this.props.restaurant['Menu Link'] : "#"}>
-                        <button className="small-button" disabled={!this.props.restaurant['Menu Link'] ? 'disabled' : ''}>
-                            Menu
-                        </button>
-                    </a>
-                        <button className="small-button" onClick={() => {this.toggleMapsModal();}}>
-                            Map
-                        </button>
-                    <a target="_blank" href={this.props.restaurant['Booking Link'] ? this.props.restaurant['Booking Link'] : "#"}>
-                        <button className="small-button" disabled={!this.props.restaurant['Booking Link'] ? 'disabled' : ''}>
-                            Book
-                        </button>
-                    </a>
+                    {this.state.isExpanded ? this.props.restaurant.description : this.props.restaurant.description.slice(0, 300).concat("...")}
                 </div>
-                </div>
+                <div className="result-actions">
+                        <a target="_blank" href={this.props.restaurant['Menu Link'] ? this.props.restaurant['Menu Link'] : "#"}>
+                            <button className="small-button" disabled={!this.props.restaurant['Menu Link'] ? 'disabled' : ''}>
+                                Menu
+                            </button>
+                        </a>
+                            <button className="small-button" onClick={() => {this.toggleMapsModal();}}>
+                                Map
+                            </button>
+                        <a target="_blank" href={this.props.restaurant['Booking Link'] ? this.props.restaurant['Booking Link'] : "#"}>
+                            <button className="small-button" disabled={!this.props.restaurant['Booking Link'] ? 'disabled' : ''}>
+                                Book
+                            </button>
+                        </a>
+                    </div>
             </div>
         </div>
         );

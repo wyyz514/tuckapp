@@ -121,8 +121,7 @@ class SearchPage extends Component {
                         <FormSection name="Price" options={[...PRICE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section" defaultSelected={[1, 2]}>
                         </FormSection>
                         
-                        <FormSection name="Distance" inputType="range" value={this.state.filters.Distance || 4} range={{min:1, max:10}} changeHandler={(e)=>{ let target = e.target; this.setState((prevState) => {return {filters: Object.assign({}, prevState.filters, {Distance: target.value})}; }) }}>
-                            <p>{this.state.filters.Distance || 4} km</p>
+                        <FormSection name="Distance" inputType="range" unit="km" shouldShowValue={true} value={this.state.filters.Distance || 4} range={{min:1, max:10}} changeHandler={(e)=>{ let target = e.target; this.setState((prevState) => {return {filters: Object.assign({}, prevState.filters, {Distance: target.value})}; }) }}>
                         </FormSection>
                         
                         <FormSection name="Ambience" options={[...AMBIENCE_TYPES]} changeHandler={this.setFilter} multiple={true} className="flexed-form-section" defaultSelected={[0, 1]}>
@@ -134,6 +133,7 @@ class SearchPage extends Component {
                         </FormSection> 
                     </Form>
                 </div>
+               
                 <div className="results-container" id="results">
                     {this.renderRestaurants()}
                     

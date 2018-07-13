@@ -35,7 +35,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 300;
   color: #666;
   height: 3em;
@@ -50,7 +50,7 @@
   border-radius: 3px;
   background-color: #1fa69a;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   line-height: 3em;
   cursor: pointer;

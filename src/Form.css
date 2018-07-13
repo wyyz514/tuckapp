@@ -57,6 +57,7 @@ input[type='range'] {
     border: 1px solid #1fa69a;
     background-color: #fff;
     color: #1fa69a;
+    font-size: 13px;
     font-weight: 300;
 }
 
@@ -81,7 +82,6 @@ input[type='range'] {
 button {
     text-transform: capitalize;
     letter-spacing: 0.03em;
-    font-size: 13px !important;
     outline: none;
 }
 
@@ -91,5 +91,6 @@ button {
     letter-spacing: 0.03em;
     margin-bottom: 10px;
     font-weight: bold;
+    margin-left: 3px;
     font-size: 14px;
 }

@@ -3,7 +3,7 @@ import './ResultCard.css';
 import { storage } from './DB';
 
 const truncate = (str) => {
-    return str.substr(0, 150) + "...";
+    return str.substr(0, 100) + "...";
 }
 
 class ResultCard extends React.Component {

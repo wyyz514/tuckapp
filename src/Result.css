@@ -45,14 +45,14 @@
     left: 0;
     top: 50vh;
     transition: all 0.5s ease-in-out;
-    height: 80vh;
+    height: 100vh;
     background-color: #fff;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     box-sizing: border-box;
 }
 
 .result-info.expanded {
-    top: 25%;
+    top: 0vh;
 }
 
 .result-info h2 {
@@ -77,16 +77,10 @@
 }
 
 .expand-toggle {
-    padding: 3px;
+    height: 1.5em;
+    width: 3em;
     text-align: center;
-    width: 6em;
-    margin-bottom: 7px;
-    font-size: 12px;
-    border-radius: 3px;
-    border: 1px solid #1fa69a;
-    color: #1fa69a;
-    letter-spacing: 0.03em;
-    
+    margin: 0 auto 10px auto;
 }
 
 .slider, .slider > div {
@@ -118,19 +112,22 @@
     font-size: 12px;
     line-height: 14px;
     margin: 15px 2px;
+    height: 37em;
     color: rgba(0, 0, 0, 0.65);
     letter-spacing: 0.03em;
-    height: 85%;
     padding-top: 20px;
     box-sizing: border-box;
+    overflow: scroll;
     position: relative;
 }
 
 .result-actions {
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 70%;
+    position: fixed;
+    height: 3em;
+    top: calc(100% - 3em);
+    left: 0;
     justify-content: space-around;
     width: 100%;
     background-color: #fff;

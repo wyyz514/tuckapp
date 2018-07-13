@@ -37,6 +37,7 @@
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 3px;
+    margin-top: 6px;
 }
 
 .result-blurb-head span {
@@ -53,8 +54,11 @@
     font-size: 12px;
     overflow: hidden;
     margin-top: 10px;
-    height: 7em;
     letter-spacing: 0.03em;
+    display: flex;
+    height: 70%;
+    align-items: center;
+    justify-content: center;
 }
 
 .grey {

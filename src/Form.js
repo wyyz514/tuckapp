@@ -12,7 +12,7 @@ export class FormSection extends Component {
    
    renderFormSectionBody() {
        if(this.props.inputType === 'range') {
-           return <input type="range" value={this.props.value} min={this.props.range.min} max={this.props.range.max} name={this.props.name} onChange={this.props.changeHandler} />
+           return <input type="range" value={this.props.value} min={this.props.range.min} max={this.props.range.max} name={this.props.name} onChange={this.props.changeHandler} style={{marginTop: "20px"}}/>
        }
        return this.props.options.map((option, index) => {
            return (
@@ -57,7 +57,7 @@ export class FormSection extends Component {
        return (
         <div className="form-section">
             <div className="title-smallbutton">
-            {this.props.name || ""}
+            {this.props.name || ""} {this.props.shouldShowValue && `(${this.props.value} ${this.props.unit})`}
             </div>
             <div className={`form-section-container ${this.props.className || ""}`} ref={(el) => {this.buttonContainer = el;}}>
                 {this.props.children}
