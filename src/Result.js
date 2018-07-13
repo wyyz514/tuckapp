@@ -109,7 +109,7 @@ class Result extends React.Component {
                     &nbsp;|&nbsp;<span className="working-hours-active" onClick={() => {this.toggleWorkingHoursModal();}}>View full hours</span>
                 </h6>
                 <div className="result-description">
-                    {this.state.isExpanded ? this.props.restaurant.description : this.props.restaurant.description.slice(0, 300).concat("...")}
+                    {this.state.isExpanded ? this.props.restaurant.description : this.props.restaurant.description.slice(0, 200).concat("...")}
                 </div>
                 <div className="result-actions">
                         <a target="_blank" href={this.props.restaurant['Menu Link'] ? this.props.restaurant['Menu Link'] : "#"}>
